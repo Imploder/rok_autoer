@@ -1,6 +1,7 @@
 from time import strftime
 
-class logger():
+
+class Logger:
 
     LOG_MSG = '\033[94m'
     LOG_SUCCESS = '\033[92m'
@@ -19,26 +20,30 @@ class logger():
 
     @staticmethod
     def assign_log_type(message_type='message'):
-        """"""
+        """
+        converts the message type into a colour to use
+        :param message_type: the message type (message, success, warning, error)
+        :return: the message colour
+        """
         message_type.lower()
         if message_type == "message":
-            message_type = logger.LOG_MSG
+            message_type = Logger.LOG_MSG
         elif message_type == "success":
-            message_type = logger.LOG_SUCCESS
+            message_type = Logger.LOG_SUCCESS
         elif message_type == "warning":
-            message_type = logger.LOG_WARNING
+            message_type = Logger.LOG_WARNING
         elif message_type == "error":
-            message_type = logger.LOG_ERROR
+            message_type = Logger.LOG_ERROR
         else:
             raise Exception(f"Invalid log message type: {message_type}")
         return message_type
 
     @staticmethod
     def log_message(message_type, message):
-        self = logger
+        self = Logger
         """
         Method which prints a log message to the console with colours
-        :param type: the type of message (Message, success, failure, error)
+        :param message_type: the type of message (Message, success, failure, error)
         :param message: The message to colour and print
         """
         print(f"{self.assign_log_type(message_type)}{self.log_add_time(message)}{self.LOG_END}")
