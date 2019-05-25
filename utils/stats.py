@@ -11,12 +11,6 @@ class Stats(object):
         self.commander_xp_obtained = 0
         self.xp_books_obtained = 0
 
-    def reset_stats(self):
-        """Resets all stats to 0"""
-
-    def track_time(self):
-        """Tracks how long the script has been running"""
-
     def print_stats(self):
         """Prints all stats to the console"""
         time_elapsed = datetime.now() - self.start_time
