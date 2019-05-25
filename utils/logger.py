@@ -10,7 +10,7 @@ class Logger:
     LOG_END = '\033[0m'
 
     @staticmethod
-    def log_add_time(message):
+    def _log_add_time(message):
         """
         Method which adds a timestamp to a log mesage
         :param message: message to add a time to
@@ -19,7 +19,7 @@ class Logger:
         return "[{}] {}".format(strftime("%Y-%m-%d %H:%M:%S"), message)
 
     @staticmethod
-    def assign_log_type(message_type='message'):
+    def _assign_log_type(message_type='message'):
         """
         converts the message type into a colour to use
         :param message_type: the message type (message, success, warning, error)
@@ -46,4 +46,4 @@ class Logger:
         :param message_type: the type of message (Message, success, failure, error)
         :param message: The message to colour and print
         """
-        print(f"{self.assign_log_type(message_type)}{self.log_add_time(message)}{self.LOG_END}")
+        print(f"{self._assign_log_type(message_type)}{self._log_add_time(message)}{self.LOG_END}")
