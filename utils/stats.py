@@ -2,10 +2,14 @@ from utils.logger import Logger
 from datetime import datetime
 
 
-class Stats(object):
+class Stats:
     """Tracks stats"""
-    def __init__(self):
-        """Initialises the Stats class"""
+    def __init__(self, config_file):
+        """
+        Initialises the Stats class with information from the config
+        :param config_file: The config class
+        """
+        self.config = config_file
         self.start_time = datetime.now()
         self.barbarians_killed = 0
         self.commander_xp_obtained = 0
@@ -15,19 +19,20 @@ class Stats(object):
         """Prints all stats to the console"""
         time_elapsed = datetime.now() - self.start_time
 
-        Logger.log_message("success", f"Script has been running for: {time_elapsed}")
+        Logger.log_message("success", f"Script has been running for: {str(time_elapsed)[:7]}")
         Logger.log_message("success", f"You have killed {self.barbarians_killed} barbarians.")
         Logger.log_message("success", f"Your commanders have gained {self.commander_xp_obtained} xp.")
-        Logger.log_message("success", f"You have gained {self.xp_books_obtained} xp books.")
+        Logger.log_message("success", f"You have gained {str(self.xp_books_obtained)[:1]} xp books.")
 
     def increment_barbarian_kills(self):
         """Increment the amount of barbarians killed"""
         self.barbarians_killed += 1
 
-    def increment_commander_xp(self, xp):
+    def increment_commander_xp(self):
         """Increment the amount of commander xp"""
-        self.barbarians_killed += xp
+        print(f"config file:")
+        self.commander_xp_obtained += self.config.barbarian_level['BarbarianLevel'] * 100
 
-    def increment_xp_books(self, books):
-        """Increment the amount of """
-        self.barbarians_killed += books
+    def increment_xp_books(self):
+        """Increment the amount of xp books obtained"""
+        self.xp_books_obtained += self.config.barbarian_level['BarbarianLevel']
