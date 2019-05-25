@@ -12,11 +12,11 @@ class Logger:
     @staticmethod
     def _log_add_time(message):
         """
-        Method which adds a timestamp to a log mesage
+        Method which adds a timestamp to a log message
         :param message: message to add a time to
         :return: message with a time stamp attached
         """
-        return "[{}] {}".format(strftime("%Y-%m-%d %H:%M:%S"), message)
+        return f"{strftime('%Y-%m-%d %H:%M:%S')} {message}"
 
     @staticmethod
     def _assign_log_type(message_type='message'):
