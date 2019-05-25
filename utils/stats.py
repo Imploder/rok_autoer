@@ -24,15 +24,8 @@ class Stats:
         Logger.log_message("success", f"Your commanders have gained {self.commander_xp_obtained} xp.")
         Logger.log_message("success", f"You have gained {str(self.xp_books_obtained)[:1]} xp books.")
 
-    def increment_barbarian_kills(self):
-        """Increment the amount of barbarians killed"""
+    def increment_barbarian_stats(self):
+        """Increment the amount of barbarians killed, xp gained, and xp books gained"""
         self.barbarians_killed += 1
-
-    def increment_commander_xp(self):
-        """Increment the amount of commander xp"""
-        print(f"config file:")
         self.commander_xp_obtained += self.config.barbarian_level['BarbarianLevel'] * 100
-
-    def increment_xp_books(self):
-        """Increment the amount of xp books obtained"""
         self.xp_books_obtained += self.config.barbarian_level['BarbarianLevel']
