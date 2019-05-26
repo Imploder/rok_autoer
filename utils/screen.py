@@ -27,7 +27,7 @@ class Region:
 class Utils:
     """Tools to interact with and check the screen"""
 
-    DEFAULT_SIMILARITY = 0.95
+    DEFAULT_SIMILARITY = 0.90
     DEFAULT_WAIT = 5
 
     @staticmethod
@@ -66,7 +66,7 @@ class Utils:
         :return: A region class with coordinate variables, or None if image not found
         """
         screen = cls.update_screen()
-        image_to_find = cv2.imread(f"../assets/{image}.png", 0)
+        image_to_find = cv2.imread(f"assets/{image}.png", 0)
         width, height, = image_to_find.shape[::-1]
 
         result = cv2.matchTemplate(screen, image_to_find, cv2.TM_CCOEFF_NORMED)

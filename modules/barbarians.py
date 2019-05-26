@@ -36,7 +36,7 @@ class BarbarianCombat:
 
         Utils.sleep(0.5)
 
-        minus_button = Utils.wait_and_find('search_minus', similarity=0.90)
+        minus_button = Utils.wait_and_find('search_minus')
         if minus_button is not None:
             Utils.sleep()
             reset_bar_location = (minus_button.x + 45, minus_button.y + 12)
@@ -45,7 +45,7 @@ class BarbarianCombat:
         else:
             Logger.log_message("error", "could not find minus button")
 
-        plus_button = Utils.find('search_plus', similarity=0.90)
+        plus_button = Utils.find('search_plus')
         plus_button_location = (plus_button.x, plus_button.y)
         for x in range(self.config.barbarian_level['BarbarianLevel'] - 1):
             Utils.click(plus_button_location)
@@ -60,14 +60,20 @@ class BarbarianCombat:
         else:
             Utils.wait_and_click('search')
             Utils.wait_and_click('search_barbarian')
-            Utils.sleep(0.5)
-            search_button_location = (search_button.x, search_button.y)
-            Utils.click(search_button_location)
+            Utils.wait_and_click('search_search')
 
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.90)
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}")
         Utils.wait_and_click('barbarian_attack')
         Utils.wait_and_click('attack_new_troops')
         Utils.wait_and_click('attack_march')
+
+    def confirm_death(self):
+        victory = Utils.wait_and_find('victory', wait=60)
+        if victory is not None:
+            self.stats.increment_barbarian_stats()
+        else:
+            Logger.log_message("error", "Could not find victorious battle")
+            quit()

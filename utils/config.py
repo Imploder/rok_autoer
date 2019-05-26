@@ -12,6 +12,7 @@ class Config:
         """
         Logger.log_message("message", "Initialising config file")
         self.config_file = config_file
+        self.barbarians = {'Barbarian': 'disabled'}
         self.barbarian_level = {'BarbarianLevel': 10}
 
     def read_config_file(self):
@@ -20,3 +21,4 @@ class Config:
         config.read(self.config_file)
 
         self.barbarian_level['BarbarianLevel'] = config.getint('BarbarianFarmer', 'BarbarianLevel')
+        self.barbarians['Barbarians'] = config.get('BarbarianFarmer', 'Barbarians')
