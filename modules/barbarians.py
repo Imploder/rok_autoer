@@ -65,15 +65,23 @@ class BarbarianCombat:
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}")
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.85)
         Utils.wait_and_click('barbarian_attack')
         Utils.wait_and_click('attack_new_troops')
         Utils.wait_and_click('attack_march')
 
-    def confirm_death(self):
+    def confirm_victory(self):
         victory = Utils.wait_and_find('victory', wait=60)
         if victory is not None:
             self.stats.increment_barbarian_stats()
         else:
             Logger.log_message("error", "Could not find victorious battle")
             quit()
+
+    @staticmethod
+    def detect_action_points_empty():
+        action_points_screen = Utils.wait_and_find('action_point_recovery', wait=1)
+        if action_points_screen is not None:
+            return action_points_screen
+        else:
+            return None

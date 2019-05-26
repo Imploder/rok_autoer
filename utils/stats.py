@@ -22,7 +22,7 @@ class Stats:
         Logger.log_message("success", f"Script has been running for: {str(time_elapsed)[:7]}")
         Logger.log_message("success", f"You have killed {self.barbarians_killed} barbarians.")
         Logger.log_message("success", f"Your commanders have gained {self.commander_xp_obtained} xp.")
-        Logger.log_message("success", f"You have gained {str(self.xp_books_obtained)[:1]} xp books.")
+        Logger.log_message("success", f"You have gained {str(self.xp_books_obtained)} xp books.")
 
     def increment_barbarian_stats(self):
         """Increment the amount of barbarians killed, xp gained, and xp books gained"""
