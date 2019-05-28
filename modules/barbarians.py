@@ -24,7 +24,7 @@ class BarbarianCombat:
         else:
             on_map = Utils.find('city')
             if on_map:
-                Logger.log_message("success", "Already on map")
+                Logger.log_message("message", "Already on map")
                 self.on_map = True
             else:
                 Logger.log_message("error", "Move to the city or map screen")
@@ -65,9 +65,10 @@ class BarbarianCombat:
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.85)
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.88)
         Utils.wait_and_click('barbarian_attack')
-        Utils.wait_and_click('attack_new_troops')
+        Utils.wait_and_click('attack_new_troops', wait=30)
+        Utils.sleep(0.5, 3)
         Utils.wait_and_click('attack_march')
 
     def confirm_victory(self):
@@ -85,3 +86,14 @@ class BarbarianCombat:
             return action_points_screen
         else:
             return None
+
+    def refill_action_points(self):
+        action_point_item_100 = Utils.wait_and_find('action_point_100')
+        action_point_item_100_location = (action_point_item_100.x, action_point_item_100.y)
+        use_button_location = (action_point_item_100_location[0] + 700, action_point_item_100_location[1] + 40)
+        for x in range(2):
+            Utils.click(use_button_location)
+            self.stats.increment_action_point_item()
+        Utils.find_and_click('action_point_close')
+        Utils.sleep(0.5, 3)
+        Utils.wait_and_click('attack_march')

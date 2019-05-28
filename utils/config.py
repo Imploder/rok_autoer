@@ -12,8 +12,10 @@ class Config:
         """
         Logger.log_message("message", "Initialising config file")
         self.config_file = config_file
-        self.barbarians = {'Barbarian': 'disabled'}
+        self.barbarians = {'Barbarians': 'disabled'}
         self.barbarian_level = {'BarbarianLevel': 10}
+        self.refill_action_points = {'RefillActionPoints': 'disabled'}
+        self.xp_mod = {'XPMod': 1.0}
 
     def read_config_file(self):
         """Reads the config file to set class variables"""
@@ -22,3 +24,5 @@ class Config:
 
         self.barbarian_level['BarbarianLevel'] = config.getint('BarbarianFarmer', 'BarbarianLevel')
         self.barbarians['Barbarians'] = config.get('BarbarianFarmer', 'Barbarians')
+        self.refill_action_points['RefillActionPoints'] = config.get('BarbarianFarmer', 'RefillActionPoints')
+        self.xp_mod['XPMod'] = config.getfloat('BarbarianFarmer', 'XPMod')

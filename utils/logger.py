@@ -1,12 +1,15 @@
 from time import strftime
+import colorama
 
 
 class Logger:
 
+    colorama.init()
     LOG_MSG = '\033[94m'
     LOG_SUCCESS = '\033[92m'
     LOG_WARNING = '\033[93m'
     LOG_ERROR = '\033[91m'
+    LOG_INFO = '\33[33m'
     LOG_END = '\033[0m'
 
     @staticmethod
@@ -25,7 +28,7 @@ class Logger:
         :param message_type: the message type (message, success, warning, error)
         :return: the message colour
         """
-        message_type.lower()
+        message_type = message_type.lower()
         if message_type == "message":
             message_type = Logger.LOG_MSG
         elif message_type == "success":
@@ -34,6 +37,8 @@ class Logger:
             message_type = Logger.LOG_WARNING
         elif message_type == "error":
             message_type = Logger.LOG_ERROR
+        elif message_type == "info":
+            message_type = Logger.LOG_INFO
         else:
             raise Exception(f"Invalid log message type: {message_type}")
         return message_type
