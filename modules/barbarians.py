@@ -67,7 +67,7 @@ class BarbarianCombat:
         Utils.sleep()
         Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.88)
         Utils.wait_and_click('barbarian_attack')
-        Utils.wait_and_click('attack_new_troops', wait=30)
+        Utils.wait_and_click('attack_new_troops', wait=120)
         Utils.sleep(0.5, 3)
         Utils.wait_and_click('attack_march')
 

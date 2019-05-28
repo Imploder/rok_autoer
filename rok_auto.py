@@ -33,7 +33,6 @@ class RokAuto:
                         Logger.log_message("warning", "Action point refill set to disabled")
                         break
                 combat_module.confirm_victory()
-                sleep(15)
             except KeyboardInterrupt:
                 Logger.log_message("error", "Script cancelled by user")
                 break

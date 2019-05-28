@@ -20,10 +20,10 @@ class Stats:
         """Prints all stats to the console"""
         time_elapsed = datetime.now() - self.start_time
 
-        Logger.log_message("message", f"Script has been running for: {str(time_elapsed)[:7]}")
-        Logger.log_message("message", f"You have killed {self.barbarians_killed} barbarians.")
-        Logger.log_message("message", f"Your commanders have gained {self.commander_xp_obtained} xp.")
-        Logger.log_message("message", f"You have gained {str(self.xp_books_obtained)} xp books.")
+        Logger.log_message("info", f"Script has been running for: {str(time_elapsed)[:7]}")
+        Logger.log_message("info", f"You have killed {self.barbarians_killed} barbarians.")
+        Logger.log_message("info", f"Your commanders have gained {self.commander_xp_obtained} xp.")
+        Logger.log_message("info", f"You have gained {str(self.xp_books_obtained)} xp books.")
         Logger.log_message("warning", f"{self.action_points_used} Action point potions have been used.")
 
     def increment_barbarian_stats(self):
