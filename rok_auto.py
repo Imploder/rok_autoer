@@ -1,6 +1,5 @@
 from utils.config import Config
 from utils.stats import Stats
-from utils.screen import sleep
 from utils.logger import Logger
 from modules.barbarians import BarbarianCombat
 

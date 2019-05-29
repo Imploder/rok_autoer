@@ -17,12 +17,12 @@ class BarbarianCombat:
 
     def navigate_to_map(self):
         """Checks whether to and navigates to the map screen"""
-        in_town = Utils.find_and_click('map')
+        in_town = Utils.wait_and_click('map')
         if in_town:
             Logger.log_message("success", "Navigated to map screen")
             self.on_map = True
         else:
-            on_map = Utils.find('city')
+            on_map = Utils.wait_and_find('city')
             if on_map:
                 Logger.log_message("message", "Already on map")
                 self.on_map = True
@@ -45,7 +45,7 @@ class BarbarianCombat:
         else:
             Logger.log_message("error", "could not find minus button")
 
-        plus_button = Utils.find('search_plus')
+        plus_button = Utils.wait_and_find('search_plus')
         plus_button_location = (plus_button.x, plus_button.y)
         for x in range(self.config.barbarian_level['BarbarianLevel'] - 1):
             Utils.click(plus_button_location)
@@ -53,7 +53,7 @@ class BarbarianCombat:
     @staticmethod
     def search_for_barbarian():
         """Checks for/Navigates to the search button, and clicks it"""
-        search_button = Utils.find('search_search')
+        search_button = Utils.wait_and_find('search_search')
         if search_button is not None:
             search_button_location = (search_button.x, search_button.y)
             Utils.click(search_button_location)
@@ -94,6 +94,6 @@ class BarbarianCombat:
         for x in range(2):
             Utils.click(use_button_location)
             self.stats.increment_action_point_item()
-        Utils.find_and_click('action_point_close')
+        Utils.wait_and_click('action_point_close')
         Utils.sleep(0.5, 3)
         Utils.wait_and_click('attack_march')

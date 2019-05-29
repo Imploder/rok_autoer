@@ -55,7 +55,7 @@ class Utils:
         Clicks at the given coordinates
         :param coordinates: List of the x and y coordinate to click
         """
-        pyautogui.click(coordinates[0] + 2, coordinates[1] + 2)
+        pyautogui.click(coordinates[0] + 1, coordinates[1] + 1)
 
     @classmethod
     def find(cls, image: str, similarity=DEFAULT_SIMILARITY):
