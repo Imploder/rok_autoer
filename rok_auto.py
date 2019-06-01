@@ -1,6 +1,8 @@
 from utils.config import Config
 from utils.stats import Stats
 from utils.logger import Logger
+from utils.adb import Adb
+from utils.screen import Utils
 from modules.barbarians import BarbarianCombat
 
 
@@ -10,6 +12,7 @@ class RokAuto:
     def __init__(self, config):
         self.config = config
         self.stats = Stats(self.config)
+        self.adb = Adb()
 
     def attack_barbarians(self):
         """Runs the barbarian module"""
@@ -38,7 +41,7 @@ class RokAuto:
 
         self.stats.print_stats()
 
-
+# Utils.output_screen("ap")
 configfile = Config('config.ini')
 configfile.read_config_file()
 script = RokAuto(configfile)

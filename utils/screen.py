@@ -4,6 +4,7 @@ import cv2
 from datetime import datetime, timedelta
 from time import sleep
 from random import uniform
+from utils.adb import Adb
 
 
 class Region:
@@ -46,8 +47,20 @@ class Utils:
     @classmethod
     def update_screen(cls):
         """Takes a screen shot of the screen, converts it to be OpenCV readable and returns it"""
-        image = pyautogui.screenshot(region=(0, 0, 1280, 720))
-        return cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2GRAY)
+        # image = pyautogui.screenshot(region=(0, 0, 1280, 720))
+        # return cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2GRAY)
+        decoded = None
+        while decoded is None:
+            decoded = cv2.imdecode(
+                numpy.fromstring(
+                    Adb.run_command_exec('screencap -p'), dtype=numpy.uint8), 0)
+        return decoded
+
+    @staticmethod
+    def output_screen(name):
+        """Takes a screenshot of the screen and saves it to a file"""
+        Adb.run_command_exec(f'screencap /sdcard/{name}.png')
+        print("Screenshot taken")
 
     @classmethod
     def click(cls, coordinates):
@@ -55,7 +68,8 @@ class Utils:
         Clicks at the given coordinates
         :param coordinates: List of the x and y coordinate to click
         """
-        pyautogui.click(coordinates[0] + 1, coordinates[1] + 1)
+        # pyautogui.click(coordinates[0] + 1, coordinates[1] + 1)
+        Adb.run_command_shell(f"input tap {coordinates[0]} {coordinates[1]}")
 
     @classmethod
     def find(cls, image: str, similarity=DEFAULT_SIMILARITY):

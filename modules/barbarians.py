@@ -34,21 +34,25 @@ class BarbarianCombat:
         Utils.wait_and_click('search')
         Utils.wait_and_click('search_barbarian')
 
-        Utils.sleep(0.5)
+        search_level = Utils.wait_and_find(
+            f"search_level_{self.config.barbarian_level['BarbarianLevel']}",
+            similarity=0.70,
+        )
 
-        minus_button = Utils.wait_and_find('search_minus')
-        if minus_button is not None:
-            Utils.sleep()
-            reset_bar_location = (minus_button.x + 45, minus_button.y + 12)
-            Utils.click(reset_bar_location)
-            Logger.log_message("success", "Reset search level")
-        else:
-            Logger.log_message("error", "could not find minus button")
+        if not search_level:
+            minus_button = Utils.wait_and_find('search_minus')
+            if minus_button is not None:
+                Utils.sleep()
+                reset_bar_location = (minus_button.x + 45, minus_button.y + 12)
+                Utils.click(reset_bar_location)
+                Logger.log_message("success", "Reset search level")
+            else:
+                Logger.log_message("error", "could not find minus button")
 
-        plus_button = Utils.wait_and_find('search_plus')
-        plus_button_location = (plus_button.x, plus_button.y)
-        for x in range(self.config.barbarian_level['BarbarianLevel'] - 1):
-            Utils.click(plus_button_location)
+            plus_button = Utils.wait_and_find('search_plus')
+            plus_button_location = (plus_button.x, plus_button.y)
+            for x in range(self.config.barbarian_level['BarbarianLevel'] - 1):
+                Utils.click(plus_button_location)
 
     @staticmethod
     def search_for_barbarian():
@@ -65,10 +69,9 @@ class BarbarianCombat:
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.88)
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.60)
         Utils.wait_and_click('barbarian_attack')
         Utils.wait_and_click('attack_new_troops', wait=120)
-        Utils.sleep(0.5, 3)
         Utils.wait_and_click('attack_march')
 
     def confirm_victory(self):
@@ -90,7 +93,7 @@ class BarbarianCombat:
     def refill_action_points(self):
         action_point_item_100 = Utils.wait_and_find('action_point_100')
         action_point_item_100_location = (action_point_item_100.x, action_point_item_100.y)
-        use_button_location = (action_point_item_100_location[0] + 700, action_point_item_100_location[1] + 40)
+        use_button_location = (action_point_item_100_location[0] + 750, action_point_item_100_location[1] + 40)
         for x in range(2):
             Utils.click(use_button_location)
             self.stats.increment_action_point_item()
