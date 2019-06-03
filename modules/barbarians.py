@@ -69,13 +69,13 @@ class BarbarianCombat:
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.85)
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.85, wait=20)
         Utils.wait_and_click('barbarian_attack')
         Utils.wait_and_click('attack_new_troops', wait=120)
         Utils.wait_and_click('attack_march')
 
     def confirm_victory(self):
-        victory = Utils.wait_and_find('victory', wait=60)
+        victory = Utils.wait_and_find('victory', wait=120)
         if victory is not None:
             self.stats.increment_barbarian_stats()
         else:
