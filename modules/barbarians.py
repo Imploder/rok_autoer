@@ -36,14 +36,14 @@ class BarbarianCombat:
 
         search_level = Utils.wait_and_find(
             f"search_level_{self.config.barbarian_level['BarbarianLevel']}",
-            similarity=0.70,
+            similarity=0.85,
         )
 
         if not search_level:
             minus_button = Utils.wait_and_find('search_minus')
             if minus_button is not None:
                 Utils.sleep()
-                reset_bar_location = (minus_button.x + 45, minus_button.y + 12)
+                reset_bar_location = (minus_button.x + 50, minus_button.y)
                 Utils.click(reset_bar_location)
                 Logger.log_message("success", "Reset search level")
             else:
@@ -69,7 +69,7 @@ class BarbarianCombat:
     def attack_barbarian(self):
         """Finds the created barbarian and attacks it with the default army"""
         Utils.sleep()
-        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.60)
+        Utils.wait_and_click(f"barbarian_{self.config.barbarian_level['BarbarianLevel']}", similarity=0.85)
         Utils.wait_and_click('barbarian_attack')
         Utils.wait_and_click('attack_new_troops', wait=120)
         Utils.wait_and_click('attack_march')

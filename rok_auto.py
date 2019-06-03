@@ -41,8 +41,8 @@ class RokAuto:
 
         self.stats.print_stats()
 
-# Utils.output_screen("ap")
-configfile = Config('config.ini')
-configfile.read_config_file()
-script = RokAuto(configfile)
+Utils.output_screen("search")
+config_file = Config('config.ini')
+config_file.read_config_file()
+script = RokAuto(config_file)
 script.attack_barbarians()
